@@ -11,8 +11,14 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   @override
   Widget build(BuildContext context) {
+
+
+
     return Consumer<Cart>(
       builder: (context, cart, child) {
+
+        print("basket Items: ${cart.basketItems.toString()}");
+
         return Scaffold(
             appBar: AppBar(
               title: Text('Checkout Page [\$ ${cart.totalPrice}]'),

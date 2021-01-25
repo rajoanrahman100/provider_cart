@@ -29,9 +29,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Item> items = [
-    Item(title: 'laptop ', price: 500.0),
-    Item(title: 'iphone x ', price: 400.0),
-    Item(title: 'keyboard ', price: 40.0),
+    Item(title: 'laptop ', price: 500.0,count: 0,totalPrice: 0),
+    Item(title: 'iphone x ', price: 400.0,count: 0,totalPrice: 0),
+    Item(title: 'keyboard ', price: 40.0,count: 0,totalPrice: 0),
   ];
   @override
   Widget build(BuildContext context) {
@@ -61,18 +61,90 @@ class _HomePageState extends State<HomePage> {
           ],
           centerTitle: true,
         ),
-        body: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(items[index].title),
-              subtitle: Text(items[index].price.toString()),
-              trailing: Icon(Icons.add),
-              onTap: () {
-                cart.add(items[index]);
-              },
-            );
-          },
+        body: Column(
+          children: [
+            Expanded(
+
+              child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+
+                  return Container(
+                    height: 80.0,
+
+                    decoration: BoxDecoration(
+                        color: Colors.grey[400],
+                      borderRadius: BorderRadius.circular(10.0)
+                    ),
+                    margin: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+
+                          child: Container(
+
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(items[index].title),
+                                Text(items[index].price.toString()),
+                                SizedBox(height: 15.0,),
+                                Text("total: ${items[index].totalPrice}"),
+
+
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        Container(
+                          child: Row(
+                            children: [
+                              IconButton(icon: Icon(Icons.add_circle_rounded,size: 20.0,), onPressed: (){
+                                cart.add(items[index]);
+                                cart.addProductCount(items[index]);
+
+                                cart.addItemsTotalPrice(items[index]);
+                              }),
+
+                              items[index].count<0 ?Text("0"):Text(items[index].count.toString()),
+
+                              IconButton(icon: Icon(Icons.remove_circle,size: 20.0,), onPressed: (){
+                                cart.removeProductCount(items[index]);
+                              }),
+                            ],
+                          ),
+                        ),
+
+
+                      ],
+                    ),
+                  );
+                  // return ListTile(
+                  //   title: Text(items[index].title),
+                  //   subtitle: Text(items[index].price.toString()),
+                  //   isThreeLine: true,
+                  //   trailing: IconButton(icon: Icon(Icons.add,size: 10,),onPressed: (){
+                  //
+                  //   },),
+                  //   onTap: () {
+                  //     cart.add(items[index]);
+                  //   },
+                  // );
+                },
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: Text("Total Prices:${cart.totalPrice}"),
+            ),
+
+
+          ],
         ),
       );
     });

@@ -4,7 +4,10 @@ import 'package:provider/provider.dart';
 
 class Cart extends ChangeNotifier {
   List<Item> _items = [];
+
   double _totalPrice = 0.0;
+  int _productItems;
+  int index;
 
   void add(Item item) {
     _items.add(item);
@@ -18,6 +21,26 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  void addProductCount(Item item){
+    //_items.add(item);
+    item.count+=1;
+    //item.price=item.price*item.count;
+    notifyListeners();
+  }
+
+  void removeProductCount(Item item){
+    //_items.add(item);
+    item.count-=1;
+    notifyListeners();
+  }
+
+  void addItemsTotalPrice(Item item){
+    item.totalPrice=item.totalPrice+item.price;
+    notifyListeners();
+  }
+
+
   int get count {
     return _items.length;
   }
@@ -28,5 +51,9 @@ class Cart extends ChangeNotifier {
 
   List<Item> get basketItems {
     return _items;
+  }
+
+  int get productItems{
+    return _productItems;
   }
 }
