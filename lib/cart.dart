@@ -40,6 +40,14 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeItemTotalPrice(Item item){
+
+    item.totalPrice=item.totalPrice-item.price;
+    _totalPrice -= item.price;
+    _items.remove(item);
+    notifyListeners();
+  }
+
 
   int get count {
     return _items.length;

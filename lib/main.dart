@@ -64,7 +64,6 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           children: [
             Expanded(
-
               child: ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (context, index) {
@@ -114,6 +113,7 @@ class _HomePageState extends State<HomePage> {
 
                               IconButton(icon: Icon(Icons.remove_circle,size: 20.0,), onPressed: (){
                                 cart.removeProductCount(items[index]);
+                                cart.removeItemTotalPrice(items[index]);
                               }),
                             ],
                           ),
