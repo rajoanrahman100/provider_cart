@@ -10,9 +10,19 @@ class Cart extends ChangeNotifier {
   int index;
 
   void add(Item item) {
-    _items.add(item);
-    _totalPrice += item.price;
-    notifyListeners();
+
+    if(_items.contains(item)){
+      print("Already added to the cart");
+    }else{
+      _items.add(item);
+      print("added to the cart");
+      _totalPrice += item.price;
+      notifyListeners();
+    }
+
+    //_items.add(item);
+   //_totalPrice += item.price;
+    //notifyListeners();
   }
 
   void remove(Item item) {
@@ -25,8 +35,9 @@ class Cart extends ChangeNotifier {
   void addProductCount(Item item){
     //_items.add(item);
     item.count+=1;
-    //item.price=item.price*item.count;
+    item.price=item.price*item.count;
     notifyListeners();
+
   }
 
   void removeProductCount(Item item){

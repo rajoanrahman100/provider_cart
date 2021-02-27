@@ -67,10 +67,8 @@ class _HomePageState extends State<HomePage> {
               child: ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (context, index) {
-
                   return Container(
                     height: 80.0,
-
                     decoration: BoxDecoration(
                         color: Colors.grey[400],
                       borderRadius: BorderRadius.circular(10.0)
@@ -99,25 +97,29 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
 
-                        Container(
-                          child: Row(
-                            children: [
-                              IconButton(icon: Icon(Icons.add_circle_rounded,size: 20.0,), onPressed: (){
-                                cart.add(items[index]);
-                                cart.addProductCount(items[index]);
 
-                                cart.addItemsTotalPrice(items[index]);
-                              }),
+                        FlatButton(color: Colors.red,onPressed: (){
+                          cart.add(items[index]);
+                        }, child: Center(child: Text("Add to cart"),))
 
-                              items[index].count<0 ?Text("0"):Text(items[index].count.toString()),
-
-                              IconButton(icon: Icon(Icons.remove_circle,size: 20.0,), onPressed: (){
-                                cart.removeProductCount(items[index]);
-                                cart.removeItemTotalPrice(items[index]);
-                              }),
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   child: Row(
+                        //     children: [
+                        //       IconButton(icon: Icon(Icons.add_circle_rounded,size: 20.0,), onPressed: (){
+                        //         cart.add(items[index]);
+                        //         cart.addProductCount(items[index]);
+                        //         cart.addItemsTotalPrice(items[index]);
+                        //       }),
+                        //
+                        //       items[index].count<0 ?Text("0"):Text(items[index].count.toString()),
+                        //
+                        //       IconButton(icon: Icon(Icons.remove_circle,size: 20.0,), onPressed: (){
+                        //         cart.removeProductCount(items[index]);
+                        //         cart.removeItemTotalPrice(items[index]);
+                        //       }),
+                        //     ],
+                        //   ),
+                        // ),
 
 
                       ],

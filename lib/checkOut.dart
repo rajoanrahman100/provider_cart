@@ -28,16 +28,51 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 : ListView.builder(
               itemCount: cart.basketItems.length,
               itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    title: Text(cart.basketItems[index].title),
-                    subtitle:
-                    Text(cart.basketItems[index].price.toString()),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () {
-                        cart.remove(cart.basketItems[index]);
-                      },
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    // child: ListTile(
+                    //   title: Text(cart.basketItems[index].title),
+                    //   subtitle: Row(
+                    //     children: [
+                    //       Text(cart.basketItems[index].price.toString()),
+                    //       cart.basketItems[index].count<0 ?Text("0"):Text(cart.basketItems[index].count.toString())
+                    //     ],
+                    //   ),
+                    //   trailing: IconButton(
+                    //     icon: Icon(Icons.add_circle),
+                    //     onPressed: () {
+                    //       cart.addProductCount(cart.basketItems[index]);
+                    //       //cart.remove(cart.basketItems[index]);
+                    //     },
+                    //   ),
+                    // ),
+                    child: Container(
+                      height: 90.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(cart.basketItems[index].title),
+                              Text(" \$ ${cart.basketItems[index].price.toString()}"),
+                              Text("total price \$ ${cart.basketItems[index].price.toString()}"),
+                            ],
+                          ),
+
+                          Row(
+                            children: [
+                              GestureDetector(onTap: (){
+                                cart.addProductCount(cart.basketItems[index]);
+                              },child: Icon(Icons.add_circle)),
+                              Text("${cart.basketItems[index].count+1}"),
+                              Icon(Icons.remove_circle),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );
